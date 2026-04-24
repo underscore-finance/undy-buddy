@@ -22,40 +22,16 @@ Then point your MCP-aware client at `@dappql/mcp` in this folder. Each client ha
 
 Already wired via the committed `.mcp.json`. Open the folder; it auto-spawns `@dappql/mcp` and auto-loads `CLAUDE.md` + `AGENTS.md` (the Undy Buddy persona).
 
-### Codex (`codex` CLI)
+### Codex / Cursor / others
 
-Add to `~/.codex/config.toml` (user-level):
+Codex and Cursor don't read project-level MCP config — they use a user-level file in your home directory. Copy-paste blocks are prepared in [`clients/`](./clients):
 
-```toml
-[mcp_servers.undy-buddy]
-command = "npx"
-args = ["-y", "@dappql/mcp"]
-env = { "DAPPQL_DEFAULT_RPC_URL" = "https://mainnet.base.org" }
-```
+- [`clients/codex.config.toml`](./clients/codex.config.toml) → append to `~/.codex/config.toml`
+- [`clients/cursor.mcp.json`](./clients/cursor.mcp.json) → merge into `~/.cursor/mcp.json`
 
-Codex doesn't read project-level `.mcp.json`. Launch `codex` from this folder — `@dappql/mcp` walks up looking for plugins in `node_modules`, and auto-loads `AGENTS.md`.
+Then launch your client from this directory (`cd undy-buddy && codex` / reload Cursor with this folder open) so `@dappql/mcp` finds `@underscore-finance/sdk` in `node_modules`.
 
-### Cursor
-
-Add to `~/.cursor/mcp.json` (user-level):
-
-```json
-{
-  "mcpServers": {
-    "undy-buddy": {
-      "command": "npx",
-      "args": ["-y", "@dappql/mcp"],
-      "env": { "DAPPQL_DEFAULT_RPC_URL": "https://mainnet.base.org" }
-    }
-  }
-}
-```
-
-Reload Cursor, open the folder.
-
-### Any MCP client
-
-The invocation is always the same: `npx -y @dappql/mcp`, launched from this directory (so it finds `@underscore-finance/sdk` in `node_modules`). Consult your client's docs for where to register MCP servers.
+For any other MCP-aware client: the invocation is always `npx -y @dappql/mcp`, launched from this directory. Register it wherever your client expects MCP server configs.
 
 ### Sanity check
 
@@ -117,7 +93,8 @@ Writes are deliberately disabled. Agents can always `simulateWrite` to preview, 
 | --- | --- |
 | `AGENTS.md` | Agent persona + curated prompts. Auto-loaded by Claude Code, Codex, Cursor, and other AGENTS.md-aware clients. |
 | `CLAUDE.md` | Claude Code–specific hook that re-asserts the Undy Buddy identity and points at AGENTS.md. |
-| `.mcp.json` | Claude Code MCP config — launches `@dappql/mcp` with the committed default RPC. Codex/Cursor need user-level config (see Setup). |
+| `.mcp.json` | Claude Code MCP config — launches `@dappql/mcp` with the committed default RPC. Codex/Cursor need user-level config. |
+| `clients/` | Reference MCP configs for Codex and Cursor — copy-paste into your user-level config file. See [`clients/README.md`](./clients/README.md). |
 | `package.json` | Pins `@underscore-finance/sdk@1.2.19` + installs `@dappql/mcp`. |
 | `.env` *(gitignored, optional)* | Your local RPC key + signing key — overrides the committed default. |
 

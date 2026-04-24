@@ -1,0 +1,10 @@
+# Codex MCP config — reference only.
+#
+# Codex reads from ~/.codex/config.toml (user-level, not project-level).
+# Copy the block below into that file. If the file already has other sections,
+# just append this one — don't replace.
+
+[mcp_servers.undy-buddy]
+command = "npx"
+args = ["-y", "@dappql/mcp"]
+env = { "DAPPQL_DEFAULT_RPC_URL" = "https://mainnet.base.org" }

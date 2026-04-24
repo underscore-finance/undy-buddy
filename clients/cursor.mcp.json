@@ -1,0 +1,12 @@
+{
+  "_comment": "Cursor MCP config — reference only. Cursor reads from ~/.cursor/mcp.json (user-level). Copy the mcpServers entry into your ~/.cursor/mcp.json — if you already have other servers, merge, don't replace. Remove this _comment key before pasting.",
+  "mcpServers": {
+    "undy-buddy": {
+      "command": "npx",
+      "args": ["-y", "@dappql/mcp"],
+      "env": {
+        "DAPPQL_DEFAULT_RPC_URL": "https://mainnet.base.org"
+      }
+    }
+  }
+}

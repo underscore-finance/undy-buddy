@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "underscore": {
+      "command": "npx",
+      "args": ["-y", "@dappql/mcp"],
+      "env": {
+        "DAPPQL_DEFAULT_RPC_URL": "https://mainnet.base.org"
+      }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "@underscore-finance/undy-buddy",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Undy Buddy — an AI agent companion for Underscore Finance. Ships an MCP server wired to @underscore-finance/sdk so any MCP-aware client (Claude Code, Cursor, Codex, …) can read, simulate, and explore the protocol via natural language.",
+  "type": "module",
+  "scripts": {
+    "mcp": "npx -y @dappql/mcp"
+  },
+  "dependencies": {
+    "@dappql/mcp": "^0.2.3",
+    "@underscore-finance/sdk": "1.2.19"
+  }
+}

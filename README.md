@@ -7,7 +7,7 @@ Ships an MCP server wired to [`@underscore-finance/sdk@1.2.19`](https://www.npmj
 ## What this is
 
 - **Zero-code protocol exploration.** Ask *"what's the total supply of UndyUsd?"*, *"which legos support USDC?"*, *"simulate a swap of 1 ETH → USDC via AeroClassic"* — the agent runs the right contract calls behind the scenes.
-- **Live example of DappQL's plugin-discovery.** No `dap.config.js` here. The SDK ships a `dappql` manifest; `@dappql/mcp` finds it in `node_modules` and exposes all 76 contracts to the agent automatically.
+- **Live example of DappQL's plugin-discovery.** No `dap.config.js` here. The SDK ships a `dappql` manifest; `@dappql/mcp` finds it in `node_modules` and exposes all 74 contracts to the agent automatically.
 - **A persona-driven agent config.** The `AGENTS.md` file documents the protocol's structural idioms (`UndyHq.getAddr(departmentId)`, `LegoBook`, templates, simulate-before-execute) so the agent doesn't flail.
 - **Two ways to run it.** Clone + install for a local stdio server, or deploy to Vercel for a shared HTTP endpoint your whole team can point any MCP client at.
 
@@ -113,7 +113,7 @@ DAPPQL_PRIVATE_KEY=0x...      # optional, only if writes are enabled
 
 ## What the agent can do
 
-76 contracts under `source="@underscore-finance/sdk"`: `UndyHq`, `Ledger`, `MissionControl`, `UndyUsd`, `UserWallet`, `AaveV3`, `AeroClassic`, `AeroSlipstream`, `Curve`, `Morpho`, `Fluid`, `Euler`, `Moonwell`, `LegoBook`, `Switchboard`, `Appraiser`, `Billing`, `ChequeBook`, `Hatchery`, `LegoTools`, `LevgVault`, and more.
+74 contracts under `source="@underscore-finance/sdk"`: `UndyHq`, `Ledger`, `MissionControl`, `UndyUsd`, `UserWallet`, `AaveV3`, `AeroClassic`, `AeroSlipstream`, `Curve`, `Morpho`, `Fluid`, `Euler`, `Moonwell`, `LegoBook`, `Switchboard`, `Appraiser`, `Billing`, `ChequeBook`, `Hatchery`, `LegoTools`, `LevgVault`, and more.
 
 Each contract: full ABI, address (when known), per-method read/write/event surface.
 

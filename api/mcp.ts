@@ -66,13 +66,26 @@ export default async function handler(
 
   // Health endpoint — useful for uptime monitoring + deploy verification.
   if (req.method === 'GET' && (req.url === '/health' || req.url?.startsWith('/health?'))) {
+    // Total surface = local config contracts + every plugin's contracts.
+    // In plugin-only mode (no dap.config.js) the local count is 0; the
+    // plugin contributes everything.
+    const localCount = Object.keys(ctx.config.contracts).length
+    const pluginCount = ctx.plugins.reduce(
+      (n, p) => n + Object.keys(p.contracts).length,
+      0,
+    )
     res.writeHead(200, { 'Content-Type': 'application/json' })
     res.end(
       JSON.stringify({
         ok: true,
         chainId: ctx.chainId ?? null,
-        contracts: Object.keys(ctx.config.contracts).length,
-        plugins: ctx.plugins.map((p) => `${p.name}@${p.version ?? '?'}`),
+        contracts: localCount + pluginCount,
+        breakdown: { local: localCount, plugins: pluginCount },
+        plugins: ctx.plugins.map((p) => ({
+          name: p.name,
+          version: p.version ?? null,
+          contracts: Object.keys(p.contracts).length,
+        })),
       }),
     )
     return

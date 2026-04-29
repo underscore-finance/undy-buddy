@@ -19,6 +19,13 @@ import type { IncomingMessage, ServerResponse } from 'node:http'
 import { createDappqlServer, loadProjectContext } from '@dappql/mcp'
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js'
 
+// Side-effect import: force Vercel's Output File Tracer to include the SDK in
+// the deployment bundle. `loadProjectContext` walks node_modules at runtime,
+// which the static tracer can't follow — without this, the SDK directory
+// doesn't ship and plugin discovery returns empty. The imported value is
+// unused; only the dependency relationship matters.
+import '@underscore-finance/sdk'
+
 type Ctx = NonNullable<Awaited<ReturnType<typeof loadProjectContext>>>
 
 // Cache the project context across warm invocations. Cold starts pay the
